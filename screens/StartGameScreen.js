@@ -1,12 +1,13 @@
 import { StyleSheet, TextInput, View, Alert } from 'react-native';
-import PrimaryButton from '../components/PrimaryButton';
+import PrimaryButton from '../components/ui/PrimaryButton';
 import { useState } from 'react';
+import CustomColors from '../constants/colors';
 /**
  * Note: autocapitalization not needed for number fields.
  * 
  * @returns 
  */
-export default function StartGameScreen() {
+export default function StartGameScreen({ onConfirm }) {
     const [enteredNumber, setEnteredNumber] = useState('');
 
     function numberInputHandler(enteredText) {
@@ -25,6 +26,8 @@ export default function StartGameScreen() {
             Alert.alert('Invalid number!', 'Number must be an integer between 1 and 99.', [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }])
             return;
         }
+
+        onConfirm(chosenNumber);
     }
 
     return (
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         marginHorizontal: 24,
         padding: 16,
-        backgroundColor: '#3b021f',
+        backgroundColor: CustomColors.primary800,
         borderRadius: 8,
         elevation: 4,
         shadowColor: 'black',
@@ -68,9 +71,9 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         fontSize: 32,
-        borderBottomColor: '#ddb52f',
+        borderBottomColor: CustomColors.accent500,
         borderBottomWidth: 2,
-        color: '#ddb52f',
+        color: CustomColors.accent500,
         marginVertical: 8,
         fontWeight: 'bold',
         textAlign: 'center'
